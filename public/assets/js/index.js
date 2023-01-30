@@ -20,25 +20,24 @@ function saveBtnAppear() {
 
 // Get notes and title text values, then save it to db file
 
-const getNotes =() => {
-
-    fetch('/api/notes', {
-        method: 'GET', // or 'PUT'
-        headers: {
-          'Content-Type': 'application/json',
-        },
-    })
+const getNotes = () =>{
+  fetch('/api/notes', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 }
 
-const saveNote =() => {
-
-    fetch('/api/notes', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-    })
-}
+// const saveNote = (note) =>{
+//   fetch('/api/notes', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(note),
+//   });
+// }
 
 const deleteNote =() => {
 
@@ -51,6 +50,10 @@ const deleteNote =() => {
 }
 
 function saveAndRenderNotes () {
+//saveNote();
+    getNotes();
+    console.log(notesData)
+    
 
 const newNote = {
 
@@ -63,7 +66,7 @@ const newNote = {
 
 
 
-saveButton.on("click", saveNotes);
+saveButton.on("click", saveAndRenderNotes);
 // noteList.on("click", ".list-group-item", handleNoteView);
 // newButton.on("click", handleNewNoteView);
 // noteList.on("click", ".delete-note", handleNoteDelete);
