@@ -49,8 +49,7 @@ const readAndAppend = (content, file) => {
 app.get('/api/notes', (req, res) => {
     console.info(`${req.method} request received for notes`);
 
-    res.json(notesData);
-    //fs.readFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+    fs.readFile(notesData).then((data) => res.json(JSON.parse(data)));
 });
 
 app.post('/api/notes', (req, res) => {
