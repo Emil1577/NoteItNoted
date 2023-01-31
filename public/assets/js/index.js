@@ -6,67 +6,86 @@ const noteList = $(".list-container .list-group");
 
 var userNotes = [];
 
+const tipForm = document.getElementById('tip-form');
+const tipsContainer = document.getElementById('tip-container');
+
+
+// need to read the json data first 
+
 function saveBtnAppear() {
 
-    if (!noteText.val().trim() || !noteTitle.val().trim()) { 
-        
-        saveButton.hide(); 
-        console.log("button")
-    
-    }else { saveButton.show(); }
+  if (!noteText.val().trim() || !noteTitle.val().trim()) {
+
+    saveButton.hide();
+    console.log("button")
+
+  } else { saveButton.show(); }
 
 }
 
 
-// Get notes and title text values, then save it to db file
+const createCard = (note) => {
+  console.log(note)
+}
 
-const getNotes = () =>{
-  fetch('/api/notes', {
-    method: 'GET',
+
+const getNotes = () =>
+  fetch('api/notes', {
+    method: 'GET', // or 'PUT'
     headers: {
       'Content-Type': 'application/json',
     },
-  });
-}
+    // body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => data)
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 
-// const saveNote = (note) =>{
-//   fetch('/api/notes', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(note),
-//   });
-// }
-
-const deleteNote =() => {
-
-    fetch('/api/notes', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-    })
-}
-
-function saveAndRenderNotes () {
-//saveNote();
-    getNotes();
-    console.log(notesData)
+const postNote = (note) =>
+  fetch('api/notes', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(note),
     
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      alert(data);
+      createCard(note);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 
-const newNote = {
 
-    title: noteTitle.val(),
-    text: noteText.val(),
-    id: noteList.children().toArray().length
+const handleFormSubmit = (e) => {
+  e.preventDefault();
+  console.log('Form submit invoked');
+
+  // Get the value of the tip and save it to a variable
+  const noteTitle = $(".note-title").val();
+  console.log(noteTitle);
+
+  // get the value of the username and save it to a variable
+  const noteText = $(".note-textarea").val().trim();
+
+  // Create an object with the tip and username
+  const newNote = {
+    title: noteTitle,
+    text: noteText,
+  };
+
+  // Make a fetch POST request to the server
+  postNote(newNote);
 };
 
-}
+//saveButton.addEventListener('click', handleFormSubmit);
 
-
-
-saveButton.on("click", saveAndRenderNotes);
+saveButton.on("click", handleFormSubmit);
 // noteList.on("click", ".list-group-item", handleNoteView);
 // newButton.on("click", handleNewNoteView);
 // noteList.on("click", ".delete-note", handleNoteDelete);
@@ -77,4 +96,3 @@ noteText.on("keyup", saveBtnAppear);
 
 
 
-//getAndRenderNotes();
