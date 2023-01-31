@@ -40,7 +40,7 @@ app.post('/api/notes', (req, res) => {
         let newNoteId = notes[i];
 
         if (newNoteId.id > highestId) {
-            // highestId will always be the highest numbered id in the notesArray.
+
             highestId = newNoteId.id;
         }
     }
@@ -66,12 +66,11 @@ app.delete("/api/notes/:id", function (req, res) {
     for (let i = 0; i < notes.length; i++) {
   
       if (notes[i].id == req.params.id) {
-        // Splice takes i position, and then deletes the 1 note.
         notes.splice(i, 1);
         break;
       }
     }
-    // Write the db.json file again.
+    // write new arrays
     fs.writeFileSync(jsonFilePath, JSON.stringify(notes), function (err) {
   
       if (err) {
