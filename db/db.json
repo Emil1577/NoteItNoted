@@ -1,16 +1,1 @@
-[
-    {
-        "title": "Test Title",
-        "text": "Test text"
-    },
-    {
-        "title": "wewe",
-        "text": "ed",
-        "new_id": "5cea07b1-ca71-4de0-a4ea-ff0d7ce439f7"
-    },
-    {
-        "title": "324",
-        "text": "324",
-        "new_id": "f1c05b76-e8c5-4ae7-9dde-711a61e1659a"
-    }
-]
+[{"title":"Test","text":"Test note","id":102}]
