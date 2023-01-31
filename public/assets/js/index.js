@@ -24,9 +24,7 @@ function saveBtnAppear() {
 }
 
 
-const createCard = (note) => {
-  console.log(data)
-}
+
 
 
 const getNotes = () =>
@@ -35,7 +33,7 @@ const getNotes = () =>
     headers: {
       'Content-Type': 'application/json',
     },
-    // body: JSON.stringify(data),
+    //body: JSON.stringify(data),
   })
     .then((response) => response.json())
     .then((data) => data)
@@ -62,7 +60,8 @@ const postNote = (note) =>
     });
 
     // When the page loads, get all the tips
-getNotes().then((data) => data.forEach((note) => createCard(note)));
+//getNotes().then((data) => data.forEach((note) => createCard(note)));
+
 
 const handleFormSubmit = (e) => {
   e.preventDefault();
