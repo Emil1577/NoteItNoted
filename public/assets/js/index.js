@@ -25,7 +25,7 @@ function saveBtnAppear() {
 
 
 const createCard = (note) => {
-  console.log(note)
+  console.log(data)
 }
 
 
@@ -61,6 +61,8 @@ const postNote = (note) =>
       console.error('Error:', error);
     });
 
+    // When the page loads, get all the tips
+getNotes().then((data) => data.forEach((note) => createCard(note)));
 
 const handleFormSubmit = (e) => {
   e.preventDefault();

@@ -4,6 +4,7 @@ const path = require('path');
 const notesData = require('./db/db.json');
 const fs = require('fs');
 const util = require('util');
+const { randomUUID } = require('crypto');
 
 const PORT = process.env.port || 3001;
 
@@ -60,11 +61,11 @@ app.post('/api/notes', (req, res) => {
       const newNote = {
         title,
         text,
-        note_id: uuid(),
+        new_id: randomUUID(),
       };
   
       readAndAppend(newNote, './db/db.json');
-      res.json(`Tip added successfully 🚀`);
+      res.json(`Notes added successfully 🚀`);
     } else {
       res.error('Error in adding tip');
     }
